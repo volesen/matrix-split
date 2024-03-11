@@ -41,7 +41,7 @@ def parse_split_command(command: str):
             return {
                 "buyer": diambiguate_user(buyer),
                 "description": description,
-                "amount": int(amount),
+                "amount": float(amount),
                 "currency": currency,
                 "recipients": {
                     "exclude": [
@@ -63,7 +63,7 @@ def parse_split_command(command: str):
             return {
                 "buyer": diambiguate_user(buyer),
                 "description": description,
-                "amount": int(amount),
+                "amount": float(amount),
                 "currency": currency,
                 "recipients": {
                     "exclude": [],
@@ -83,7 +83,7 @@ def parse_split_command(command: str):
             return {
                 "buyer": diambiguate_user(buyer),
                 "description": description,
-                "amount": int(amount),
+                "amount": float(amount),
                 "currency": currency,
                 "recipients": {
                     "include": [

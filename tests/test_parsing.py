@@ -7,7 +7,7 @@ def test_parsing_to_reciepients():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "include": ["@A2"],
@@ -19,7 +19,7 @@ def test_parsing_to_reciepients():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "include": ["@A2", "@jebi"],
@@ -33,7 +33,7 @@ def test_parsing_everyone():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": [],
@@ -47,7 +47,7 @@ def test_parsing_everyone_but():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": ["@A2"],
@@ -59,7 +59,7 @@ def test_parsing_everyone_but():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": ["@A2", "@jebi"],
@@ -73,7 +73,7 @@ def test_parsing_description_quotes():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": [],
@@ -85,7 +85,7 @@ def test_parsing_description_quotes():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": [],
@@ -99,7 +99,7 @@ def test_parsing_mention():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": [],
@@ -111,7 +111,7 @@ def test_parsing_mention():
     ) == {
         "buyer": "@volesen",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": [],
@@ -123,7 +123,7 @@ def test_parsing_mention():
     ) == {
         "buyer": "@volesen:matrix.org",
         "description": "Beer 🍻",
-        "amount": 100,
+        "amount": 100.00,
         "currency": "DKK",
         "recipients": {
             "exclude": [],
