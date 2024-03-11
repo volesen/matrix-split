@@ -7,6 +7,7 @@ authors = [
 ]
 dependencies = [
     "pulp>=2.8.0",
+    "matrix-nio[e2e]>=0.24.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
