@@ -9,33 +9,31 @@ def settle_balances(balances):
     """
     prob = pulp.LpProblem("settle", pulp.LpMinimize)
 
-    # Decision variables
-    # x[i, j] is the amount of money that i owes to j
-    x = pulp.LpVariable.dicts(
-        "x", [(i, j) for i in balances for j in balances if i != j], lowBound=0
+    # Decision variables: t[i, j] is the amount of money that member i pays to member j
+    t = pulp.LpVariable.dicts(
+        "transaction",
+        [(i, j) for i in balances for j in balances if i != j],
+        lowBound=0,
+        cat="Continuous",
     )
 
-    # Objective function
-    # We want to minimize the amount of money that is transferred
-    prob += pulp.lpSum([x[i, j] for i in balances for j in balances if i != j])
+    # Objective function: minimize the amount of money that is transferred
+    prob += pulp.lpSum([t[i, j] for i in balances for j in balances if i != j])
 
-    # Constraints
-    # We want to settle the balances
-    # For each member, the sum of money going in and out should be equal to the balance
+    # Constraints: each member's total outgoing and incoming amounts equal their balance
     for i in balances:
         prob += (
-            pulp.lpSum([x[i, j] for j in balances if i != j])
-            - pulp.lpSum([x[j, i] for j in balances if i != j])
+            pulp.lpSum([t[i, j] for j in balances if i != j])
+            - pulp.lpSum([t[j, i] for j in balances if i != j])
             == balances[i]
         )
 
-    # Solve the problem
     prob.solve()
 
-    # Return the transactions
+    # Extract and return transactions where money is transferred
     return [
-        (i, j, x[i, j].varValue)
+        (i, j, t[i, j].varValue)
         for i in balances
         for j in balances
-        if i != j and x[i, j].varValue > 0
+        if i != j and t[i, j].varValue > 0
     ]
