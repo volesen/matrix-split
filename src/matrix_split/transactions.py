@@ -19,6 +19,7 @@ def split_purchase(purchase, members):
     amount_per_recipient = amount / len(recipients)
 
     for recipient in recipients:
+        # TODO: `from` and `to` are probably not the best names for the concepts
         yield {
             "from": buyer,
             "to": recipient,
