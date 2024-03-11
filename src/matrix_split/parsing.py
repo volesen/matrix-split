@@ -13,17 +13,19 @@ scanner = re.Scanner(
 )
 
 
-def tokenize(command: str):
+def tokenize(command: str) -> list[str]:
     tokens, _ = scanner.scan(command)
     return tokens
 
 
-def diambiguate_user(user: str):
-    # TODO: Should normalize the display name or user_id to the user_id
-    return "@" + user if not user.startswith("@") else user
+def parse_split_command(command: str, display_name_to_user_id: dict) -> dict:
+    def diambiguate_mention(mention: str) -> str:
+        """ """
+        if ":" in mention:
+            return mention
 
+        return display_name_to_user_id[mention.removeprefix("@")]
 
-def parse_split_command(command: str):
     match tokenize(command):
         case [
             "!split",
@@ -39,13 +41,13 @@ def parse_split_command(command: str):
             *recipients,
         ]:
             return {
-                "buyer": diambiguate_user(buyer),
+                "buyer": diambiguate_mention(buyer),
                 "description": description,
                 "amount": float(amount),
                 "currency": currency,
                 "recipients": {
                     "exclude": [
-                        diambiguate_user(recipient) for recipient in recipients
+                        diambiguate_mention(recipient) for recipient in recipients
                     ],
                 },
             }
@@ -61,7 +63,7 @@ def parse_split_command(command: str):
             "everyone",
         ]:
             return {
-                "buyer": diambiguate_user(buyer),
+                "buyer": diambiguate_mention(buyer),
                 "description": description,
                 "amount": float(amount),
                 "currency": currency,
@@ -81,13 +83,13 @@ def parse_split_command(command: str):
             *recipients,
         ]:
             return {
-                "buyer": diambiguate_user(buyer),
+                "buyer": diambiguate_mention(buyer),
                 "description": description,
                 "amount": float(amount),
                 "currency": currency,
                 "recipients": {
                     "include": [
-                        diambiguate_user(recipient) for recipient in recipients
+                        diambiguate_mention(recipient) for recipient in recipients
                     ],
                 },
             }
