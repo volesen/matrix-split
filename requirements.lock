@@ -8,3 +8,5 @@
 #   with-sources: false
 
 -e file:.
+pulp==2.8.0
+    # via matrix-split

@@ -14,4 +14,6 @@ packaging==24.0
     # via pytest
 pluggy==1.4.0
     # via pytest
+pulp==2.8.0
+    # via matrix-split
 pytest==8.1.1
